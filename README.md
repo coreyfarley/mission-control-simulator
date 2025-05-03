@@ -1,1 +1,1 @@
-# CS361_Project
+# Mission Control Simulator

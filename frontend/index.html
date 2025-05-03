@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mission Control Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Mission Control Dashboard</h1>
+
+  <section id="services">
+
+    <!--CREW-->
+    <div class="service">
+        <label for="crew-select">Select Crew:</label>
+        <select id="crew-select">
+            <option value="" disabled selected>Select a crew</option>
+            <option value="Artemis II">Artemis II</option>
+            <option value="Apollo 11">Apollo 11</option>
+            <option value="Expedition 73">Expedition 73</option>
+            <option value="Crew 8">Crew 8</option>
+         </select>
+      <button id="crew-btn">Confirm Crew</button>
+      <span id="crew-status" class="status">❌</span>
+    </div>
+
+    <!--Destination-->
+    <div class="service">
+        <label for="destination-select">Select Destination:</label>
+        <select id="destination-select">
+            <option value="" disabled selected>Select a destination</option>
+            <option value="Caloris Basin, Mercury">Caloris Basin, Mercury</option>
+            <option value="Sea of Tranquility, Moon">Sea of Tranquility, Moon</option>
+            <option value="Olympus Mons, Mars">Olympus Mons, Mars</option>
+            <option value="Great Red Spot, Jupiter">Great Red Spot, Jupiter</option>
+        </select>
+        <button id="destination-btn">Confirm Destination</button>
+        <span id="destination-status" class="status">❌</span>
+    </div>
+    
+    <!--Weather-->
+    <div class="service">
+        <label for="weather-select">Select Launch Site:</label>
+        <select id="weather-select">
+            <option value="" disabled selected>Select a launch site</option>
+            <option value="Cape Canaveral, USA">Cape Canaveral, USA</option>
+            <option value="Vandenberg Space Force Base, USA">Vandenberg Space Force Base, USA</option>
+            <option value="Baikonur Cosmodrome, Russia">Baikonur Cosmodrome, Russia</option>
+            <option value="Tanegashima Space Center, Japan">Tanegashima Space Center, Japan</option>
+        </select>
+      <button id="weather-btn">Get Weather</button>
+      <span id="weather-status" class="status">❌</span>
+    </div>
+
+    <!--International Space Station-->
+    <div class="service">
+        <button id="iss-btn">Track ISS</button>
+        <span id="iss-status" class="status">❌</span>
+    </div>
+
+</section>
+  
+
+  <section id="outputs">
+    <div id="crew-output"></div>
+    <div id="destination-output"></div>
+    <div id="weather-output"></div>
+    <div id="iss-output"></div>
+  </section>
+
+  <section id="launch-section">
+    <button id="launch-btn" disabled>GO FOR LAUNCH</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
