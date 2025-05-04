@@ -10,6 +10,7 @@
   </nav>
 </head>
 <body>
+  <button id="reset-btn">Reset Mission</button>
   <h1>Mission Control Dashboard</h1>
 
   <section id="services">
@@ -77,5 +78,16 @@
   </section>
 
   <script src="script.js"></script>
+
+  <!--reset button text box-->
+  <div id="reset-confirm" class="modal hidden">
+    <div class="modal-content">
+      <p>Are you sure you want to reset the mission?<br>
+      All selected data (weather site, destination, crew, and ISS) will be cleared and must be re-entered.</p>
+      <button id="confirm-reset">Yes</button>
+      <button id="cancel-reset">Cancel</button>
+    </div>
+  </div>
+  
 </body>
 </html>

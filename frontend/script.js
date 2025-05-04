@@ -9,12 +9,12 @@ const statusFlags = {
     document.getElementById(`${serviceId}-status`).textContent = "✅";
     statusFlags[serviceId] = true;
   
-    // Enable launch button if all services are complete
+    // enable launch button if all services are complete
     const allReady = Object.values(statusFlags).every(v => v === true);
     document.getElementById("launch-btn").disabled = !allReady;
   }
   
-  // Crew Selection
+  // crew selection
   document.getElementById("crew-btn").addEventListener("click", () => {
     const mission = document.getElementById("crew-select").value;
   
@@ -31,7 +31,7 @@ const statusFlags = {
     updateChecklist("crew");
   });
   
-  // Destination Selection
+  // destination selection
   document.getElementById("destination-btn").addEventListener("click", () => {
     const destination = document.getElementById("destination-select").value;
   
@@ -45,7 +45,7 @@ const statusFlags = {
     updateChecklist("destination");
   });
   
-  // Weather Selection
+  // weather selection
   document.getElementById("weather-btn").addEventListener("click", () => {
     const site = document.getElementById("weather-select").value;
   
@@ -58,15 +58,58 @@ const statusFlags = {
     updateChecklist("weather");
   });
   
-  // ISS Tracking
+  // ISS tracking
   document.getElementById("iss-btn").addEventListener("click", () => {
     const iss = "ISS currently over: South Pacific Ocean (Lat: -15.6, Lon: -137.8)";
     document.getElementById("iss-output").innerHTML = `<h3>ISS Location</h3><p>${iss}</p>`;
     updateChecklist("iss");
   });
   
-  // Launch Confirmation
+  // launch confirmation
   document.getElementById("launch-btn").addEventListener("click", () => {
     alert("🚀 Launch Sequence Confirmed. GO FOR LAUNCH!");
   });
+
+  // reset button functionality
+  // opens modal
+document.getElementById("reset-btn").addEventListener("click", () => {
+  document.getElementById("reset-confirm").classList.remove("hidden");
+});
+
+// cancel button hides modal
+document.getElementById("cancel-reset").addEventListener("click", () => {
+  document.getElementById("reset-confirm").classList.add("hidden");
+});
+
+// confirm reset
+document.getElementById("confirm-reset").addEventListener("click", () => {
+  // reset dropdowns to default
+  document.getElementById("crew-select").selectedIndex = 0;
+  document.getElementById("destination-select").selectedIndex = 0;
+  document.getElementById("weather-select").selectedIndex = 0;
+
+  // clear output areas
+  document.getElementById("crew-output").innerHTML = "";
+  document.getElementById("destination-output").innerHTML = "";
+  document.getElementById("weather-output").innerHTML = "";
+  document.getElementById("iss-output").innerHTML = "";
+
+  // reset status indicators
+  document.getElementById("crew-status").textContent = "❌";
+  document.getElementById("destination-status").textContent = "❌";
+  document.getElementById("weather-status").textContent = "❌";
+  document.getElementById("iss-status").textContent = "❌";
+
+  // reset internal flags
+  for (let key in statusFlags) {
+    statusFlags[key] = false;
+  }
+
+  // disable launch button
+  document.getElementById("launch-btn").disabled = true;
+
+  // hide modal
+  document.getElementById("reset-confirm").classList.add("hidden");
+});
+
   

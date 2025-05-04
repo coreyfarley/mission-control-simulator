@@ -1,61 +1,108 @@
+/* ===== Base Page Styles ===== */
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #0e0f13;
-    color: #fff;
-    padding: 2rem;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  #services {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2rem;
-  }
-  
-  .service {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  button {
-    padding: 1rem;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .status {
-    font-size: 1.5rem;
-  }
-  
-  #outputs div {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #1c1e26;
-    border-radius: 5px;
-  }
-  
-  #launch-section {
-    text-align: center;
-    margin-top: 2rem;
-  }
-  
-  #launch-btn {
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-  }
-  
-  nav {
-    text-align: right;
-    margin-bottom: 1rem;
-  }
-  nav a {
-    color: #ccc;
-    margin-left: 1rem;
-    text-decoration: none;
-  }
+  /* set default font and colors for the entire page */
+  font-family: Arial, sans-serif;
+  background-color: #0e0f13;
+  color: #fff;
+  padding: 2rem;
+}
+
+h1 {
+  /* main heading */
+  text-align: center;
+}
+
+/* ===== Service Button Layout ===== */
+
+#services {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+.service {
+  /* stack each service's elements vertically and center-align */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  /* all buttons */
+  padding: 1rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.status {
+  /* make status checkmarks larger */
+  font-size: 1.5rem;
+}
+
+/* ===== Output Display Areas ===== */
+
+#outputs div {
+  /* style individual service output boxes */
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #1c1e26;
+  border-radius: 5px;
+}
+
+/* ===== Launch Button Section ===== */
+
+#launch-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+#launch-btn {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+}
+
+/* ===== Navigation Links ===== */
+
+nav {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+nav a {
+  color: #ccc;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+/* ===== Reset Confirmation Popup ===== */
+
+.modal.hidden {
+  /* hide when inactive */
+  display: none;
+}
+
+.modal {
+  /* fullscreen overlay with dark transparent background */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  /* inner box for confirmation text and buttons */
+  background: #1c1e26;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  color: #fff;
+}
+
   
