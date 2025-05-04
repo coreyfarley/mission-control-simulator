@@ -7,6 +7,7 @@
   <nav>
     <a href="landing.html">Home</a>
     <a href="about.html">About</a>
+    <a href="index.html">Dashboard</a>
   </nav>
 </head>
 <body>
@@ -18,6 +19,10 @@
     <!--CREW-->
     <div class="service">
         <label for="crew-select">Select Crew:</label>
+        <button class="info-btn" data-target="crew-info">ℹ️</button>
+        <div id="crew-info" class="info-box hidden">
+        Each mission requires specific roles: commander, pilot, engineer, and specialist.
+        </div>
         <select id="crew-select">
             <option value="" disabled selected>Select a crew</option>
             <option value="Artemis II">Artemis II</option>
@@ -32,6 +37,10 @@
     <!--Destination-->
     <div class="service">
         <label for="destination-select">Select Destination:</label>
+        <button class="info-btn" data-target="destination-info">ℹ️</button>
+        <div id="destination-info" class="info-box hidden">
+        Destinations vary in distance, travel time, and fuel needs.
+        </div>
         <select id="destination-select">
             <option value="" disabled selected>Select a destination</option>
             <option value="Caloris Basin, Mercury">Caloris Basin, Mercury</option>
@@ -46,6 +55,11 @@
     <!--Weather-->
     <div class="service">
         <label for="weather-select">Select Launch Site:</label>
+        <button class="info-btn" data-target="weather-info">ℹ️</button>
+        <div id="weather-info" class="info-box hidden">
+          Launch site weather can influence mission safety. Ensure
+          values are safe before continuing with launch.
+        </div>
         <select id="weather-select">
             <option value="" disabled selected>Select a launch site</option>
             <option value="Cape Canaveral, USA">Cape Canaveral, USA</option>
@@ -59,9 +73,19 @@
 
     <!--International Space Station-->
     <div class="service">
-        <button id="iss-btn">Track ISS</button>
-        <span id="iss-status" class="status">❌</span>
+      <label for="iss-btn">Track ISS:</label>
+      <button class="info-btn" data-target="iss-info">ℹ️</button>
+    
+      <div id="iss-info" class="info-box hidden">
+        The ISS location is important for rendezvous missions. Verify current location of ISS will not 
+        interfere with selected launch site.
+      </div>
+
+      <button id="iss-btn">Track ISS</button>
+    
+      <span id="iss-status" class="status">❌</span>
     </div>
+    
 
 </section>
   
@@ -77,8 +101,6 @@
     <button id="launch-btn" disabled>GO FOR LAUNCH</button>
   </section>
 
-  <script src="script.js"></script>
-
   <!--reset button text box-->
   <div id="reset-confirm" class="modal hidden">
     <div class="modal-content">
@@ -89,5 +111,6 @@
     </div>
   </div>
   
+  <script src="script.js"></script>
 </body>
 </html>

@@ -112,4 +112,16 @@ document.getElementById("confirm-reset").addEventListener("click", () => {
   document.getElementById("reset-confirm").classList.add("hidden");
 });
 
+// Information buttons: toggle visibility of linked info boxes
+document.querySelectorAll(".info-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const targetId = btn.getAttribute("data-target");
+    const infoBox = document.getElementById(targetId);
+    if (infoBox) {
+      infoBox.classList.toggle("hidden");
+    }
+  });
+});
+
+
   
