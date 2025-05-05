@@ -24,7 +24,7 @@ function updateChecklist(serviceId) {
 document.getElementById("crew-btn").addEventListener("click", () => {
   const mission = document.getElementById("crew-select").value;
   const crewOutput = `
-  <h3>Crew Selected: ${mission}</h3>
+  <div class="output-box">
   <div class="crew-grid">
     <div class="role-header">Commander</div>
     <div class="role-header">Pilot</div>
@@ -36,6 +36,7 @@ document.getElementById("crew-btn").addEventListener("click", () => {
     <div>Christina Koch</div>
     <div>Jeremy Hansen</div>
   </div>
+  </div>
 `;
   document.getElementById("crew-output").innerHTML = crewOutput;
   updateChecklist("crew");
@@ -45,7 +46,7 @@ document.getElementById("crew-btn").addEventListener("click", () => {
 document.getElementById("destination-btn").addEventListener("click", () => {
   const destination = document.getElementById("destination-select").value;
   const destOutput = `
-  <h3>Destination Selected: ${destination}</h3>
+  <div class="output-box">
   <div class="destination-grid">
     <div class="dest-header">Distance</div>
     <div class="dest-header">Estimated Flight Time</div>
@@ -54,6 +55,7 @@ document.getElementById("destination-btn").addEventListener("click", () => {
     <div>500 million km</div>
     <div>6 months</div>
     <div>700 tons</div>
+  </div>
   </div>
 `;
 
@@ -64,19 +66,35 @@ document.getElementById("destination-btn").addEventListener("click", () => {
 // === Weather selection handler ===
 document.getElementById("weather-btn").addEventListener("click", () => {
   const site = document.getElementById("weather-select").value;
-  const weather = "72°F, Overcast, 62% Humidity";
+
+  // Split weather into parts (example values)
+  const temp = "72°F";
+  const skies = "Overcast";
+  const humidity = "62%";
+
   const weatherOutput = `
-    <h3>Weather at ${site}</h3>
-    <p>${weather}</p>
+    <div class="output-box">
+      <div class="weather-grid">
+        <div class="weather-header">Temperature</div>
+        <div class="weather-header">Skies</div>
+        <div class="weather-header">Humidity</div>
+
+        <div>${temp}</div>
+        <div>${skies}</div>
+        <div>${humidity}</div>
+      </div>
+    </div>
   `;
+
   document.getElementById("weather-output").innerHTML = weatherOutput;
   updateChecklist("weather");
 });
 
+
 // === ISS tracking handler ===
 document.getElementById("iss-btn").addEventListener("click", () => {
-  const iss = "ISS currently over: South Pacific Ocean (Lat: -15.6, Lon: -137.8)";
-  document.getElementById("iss-output").innerHTML = `<h3>ISS Location</h3><p>${iss}</p>`;
+  const iss = "South Pacific Ocean (Lat: -15.6, Lon: -137.8)";
+  document.getElementById("iss-output").innerHTML = `<div class="output-box"><h3>ISS Location</h3><p>${iss}</p></div>`;
   updateChecklist("iss");
 });
 
@@ -126,7 +144,7 @@ document.querySelectorAll(".close-info").forEach((btn) => {
 
 // === Launch Code Logic ===
 function generateLaunchCode() {
-  const chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let code = "";
   for (let i = 0; i < 4; i++) {
     code += chars[Math.floor(Math.random() * chars.length)];
