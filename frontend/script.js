@@ -257,3 +257,16 @@ document.getElementById("randomize-btn").addEventListener("click", () => {
   document.getElementById("iss-btn").click();
 });
 
+// === Keyboard Shortcut for Reset (R) ===
+document.addEventListener("keydown", (event) => {
+  const tag = document.activeElement.tagName.toLowerCase();
+  const isTyping = tag === "input" || tag === "textarea";
+
+  if (!isTyping && event.key.toLowerCase() === "r") {
+    event.preventDefault();
+    // Simulate clicking the reset button
+    document.getElementById("reset-btn").click();
+  }
+});
+
+
