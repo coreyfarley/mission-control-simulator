@@ -4,26 +4,37 @@
   <meta charset="UTF-8" />
   <title>About – Mission Control</title>
   <link rel="stylesheet" href="style.css" />
-  <nav>
-    <a href="landing.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="index.html">Dashboard</a>
-  </nav>
 </head>
     <body>
-        <h1>Mission Control Simulator</h1>
+        <nav>
+            <a href="landing.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="index.html">Dashboard</a>
+        </nav>
+        <div class="about-container">
+        <img src="images/missionpatch.png" alt="Mission Patch Logo" class="mission-logo">
+        <h1 class="page-title">Mission Control Simulator</h1>
         <h2>About This Project</h2>
-        <p>director@mission-control.com:/$  Welcome Specialist, we are eager to get you started!</p>
-        <p>>/$  Mission Control Simulator is your chance to plan for a space flight, without the real world consequences.</p>
-        <p>> Use your dashboard to: </p>
-        <ul>
-            <li> monitor weather at popular launch sites around the world.</li>
-            <li> select a flight destination to calculate duration of flight, fuel needed, and miles from earth.</li>
-            <li> hand pick a real astronaught crew from years past.</li>
-            <li> locate the International Space Station (ISS) to ensure a clear launch corridor.</li>
-        </ul>
-        <p>So suit up Specialist, it's time for lift-off!</p>
-        <a href="landing.html"><button>Back to Home</button></a>
-        <a href="index.html"><button>Launch Dashboard</button></a>
+
+        <div class="terminal-box">
+          <p><span class="terminal-user">c:\users\director@mission-control $</span> Welcome Specialist, we are eager to get you started!</p>
+          <p>Mission Control Simulator is your chance to plan for a space flight — without the real-world consequences.</p>
+          <p>Use your dashboard to:</p>
+          <ul class="custom-list">
+            <li>Monitor weather at popular launch sites around the world.</li>
+            <li>Select a destination to calculate flight duration, fuel needed, and miles from Earth.</li>
+            <li>Hand-pick a real astronaut crew from years past.</li>
+            <li>Locate the International Space Station (ISS) to ensure a clear launch corridor.</li>
+          </ul>
+          <p></p>So suit up, Specialist — it is time for lift-off!</p>
+          <p class="terminal-output">$</p>
+        </div>
+        
+        <div class="wide-button-container">
+          <a href="landing.html"><button>Back to Home</button></a>
+          <a href="index.html"><button>Launch Dashboard</button></a>
+        </div>
+        
+        </div>
     </body>
 </html>

@@ -4,122 +4,131 @@
   <meta charset="UTF-8">
   <title>Mission Control Dashboard</title>
   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="reset-btn">Reset Mission</button>
+  
+  <!---Navigation-->
   <nav>
     <a href="landing.html">Home</a>
     <a href="about.html">About</a>
     <a href="index.html">Dashboard</a>
   </nav>
-</head>
-<body>
-  <button id="reset-btn">Reset Mission</button>
-  <h1>Mission Control Dashboard</h1>
+  
+  <!--Heading -->
+  <div class="dashboard-container">
+    <img src="images/missionpatch.png" alt="Mission Patch Logo" class="mission-logo">
+    <h1 class="page-title">Mission Control Simulator</h1>
+  </div>
+
+  <!--Random Mission Button-->
+<section id="randomize-section" style="text-align: center; margin-top: 1rem;">
+  <button id="randomize-btn">Randomize Mission</button>
+</section>
 
   <section id="services">
 
-    <!--CREW-->
-    <div class="service">
+<!-- CREW -->
+<div class="service">
+  <div class="label-row">
+    <span id="crew-status" class="status-indicator"></span>
+    <label for="crew-select">Select Crew:</label>
+    <button class="info-btn" data-target="crew-info">ℹ️</button>
+  </div>
 
-        <div class="label-row">
-          <button class="info-btn" data-target="crew-info">ℹ️</button>
-          <label for="crew-select">Select Crew:</label>
-        </div>
-
-        <div id="crew-info" class="info-box hidden">
-        Each mission requires specific roles: commander, pilot, engineer, and specialist.
-        </div>
-
-        <select id="crew-select">
-            <option value="" disabled selected>click here</option>
-            <option value="Artemis II">Artemis II</option>
-            <option value="Apollo 11">Apollo 11</option>
-            <option value="Expedition 73">Expedition 73</option>
-            <option value="Crew 8">Crew 8</option>
-         </select>
-
-      <button id="crew-btn">Confirm Crew</button>
-      <span id="crew-status" class="status">❌</span>
+  <div class="service-row">
+    <div class="input-group">
+      <select id="crew-select">
+        <option value="" disabled selected>select a crew...</option>
+        <option value="Artemis II">Artemis II</option>
+        <option value="Apollo 11">Apollo 11</option>
+        <option value="Expedition 73">Expedition 73</option>
+        <option value="Crew 8">Crew 8</option>
+      </select>
     </div>
 
-
-    <!--Destination-->
-    <div class="service">
-
-      <div class="label-row">
-        <button class="info-btn" data-target="destination-info">ℹ️</button>
-        <label for="destination-select">Select Destination:</label>
-      </div>
+    <div id="crew-output" class="output-box"></div>
+    <button id="crew-btn" class="align-right">Confirm Crew</button>
+    </div>
     
-      <div id="destination-info" class="info-box hidden">
-        Destinations vary by distance, duration, and fuel needs. Choose based on mission parameters.
-      </div>
-    
+</div>
+
+ 
+<!-- DESTINATION -->
+<div class="service">
+  <div class="label-row">
+    <span id="destination-status" class="status-indicator"></span>
+    <label for="destination-select">Select Destination:</label>
+    <button class="info-btn" data-target="destination-info">ℹ️</button>
+  </div>
+
+  <div class="service-row">
+    <div class="input-group">
       <select id="destination-select">
-        <option value="" disabled selected>click here</option>
+        <option value="" disabled selected>select a destination...</option>
         <option value="Caloris Basin, Mercury">Caloris Basin, Mercury</option>
         <option value="Sea of Tranquility, Moon">Sea of Tranquility, Moon</option>
         <option value="Olympus Mons, Mars">Olympus Mons, Mars</option>
         <option value="Great Red Spot, Jupiter">Great Red Spot, Jupiter</option>
       </select>
-    
-      <button id="destination-btn">Confirm Destination</button>
-      <span id="destination-status" class="status">❌</span>
-    </div>
-    
-
-
-    <!--Weather-->
-    <div class="service">
-
-      <div class="label-row">
-        <button class="info-btn" data-target="weather-info">ℹ️</button>
-        <label for="weather-select">Select Launch Site:</label>
-      </div>
-    
-      <div id="weather-info" class="info-box hidden">
-        Weather conditions at the launch site impact safety and trajectory. Monitor carefully.
-      </div>
-    
-      <select id="weather-select">
-        <option value="" disabled selected>click here</option>
-        <option value="Cape Canaveral, USA">Cape Canaveral, USA</option>
-        <option value="Vandenberg Space Force Base, USA">Vandenberg Space Force Base, USA</option>
-        <option value="Baikonur Cosmodrome, Russia">Baikonur Cosmodrome, Russia</option>
-        <option value="Tanegashima Space Center, Japan">Tanegashima Space Center, Japan</option>
-      </select>
-    
-      <button id="weather-btn">Get Weather</button>
-      <span id="weather-status" class="status">❌</span>
     </div>
 
-    
+    <div id="destination-output" class="output-box"></div>
 
-    <!--International Space Station-->
-    <div class="service">
+    <button id="destination-btn" class="align-right">Confirm Destination</button>
+  </div>
+</div>
 
-      <div class="label-row">
-        <button class="info-btn" data-target="iss-info">ℹ️</button>
-        <label for="iss-btn">Track ISS:</label>
-      </div>
-    
-      <div id="iss-info" class="info-box hidden">
-        The ISS's current position helps determine safe timing and orbital paths for launches.
-      </div>
-    
-      <button id="iss-btn">Track ISS</button>
-      <span id="iss-status" class="status">❌</span>
-    </div>
-    
-
-</section>
   
-
-  <section id="outputs">
-    <div id="crew-output"></div>
-    <div id="destination-output"></div>
-    <div id="weather-output"></div>
-    <div id="iss-output"></div>
+    <!-- WEATHER -->
+    <div class="service">
+      <div class="label-row">
+        <span id="weather-status" class="status-indicator"></span>
+        <label for="weather-select">Select Launch Site:</label>
+        <button class="info-btn" data-target="weather-info">ℹ️</button>
+      </div>
+    
+      <div class="service-row">
+        <div class="input-group">
+          <select id="weather-select">
+            <option value="" disabled selected>select a launch site...</option>
+            <option value="Cape Canaveral, USA">Cape Canaveral, USA</option>
+            <option value="Vandenberg Space Force Base, USA">Vandenberg Space Force Base, USA</option>
+            <option value="Baikonur Cosmodrome, Russia">Baikonur Cosmodrome, Russia</option>
+            <option value="Tanegashima Space Center, Japan">Tanegashima Space Center, Japan</option>
+          </select>
+        </div>
+    
+        <div id="weather-output" class="output-box"></div>
+    
+        <button id="weather-btn" class="align-right">Get Weather</button>
+      </div>
+    </div>
+    
+  
+    <!-- ISS -->
+    <div class="service">
+      <div class="label-row">
+        <span id="iss-status" class="status-indicator"></span>
+        <label for="iss-btn">Track ISS:</label>
+        <button class="info-btn" data-target="iss-info">ℹ️</button>
+      </div>
+    
+      <div class="service-row">
+        <div class="input-group">
+          <!-- No select needed here -->
+        </div>
+    
+        <div id="iss-output" class="output-box"></div>
+    
+        <button id="iss-btn" class="align-right">Track ISS</button>
+      </div>
+    </div>
+    
+  
   </section>
 
+  <!--Go For Launch Button-->
   <section id="launch-section">
     <button id="launch-btn" disabled>GO FOR LAUNCH</button>
   </section>
@@ -134,6 +143,66 @@
     </div>
   </div>
   
+  <!-- Launch Code Section -->
+<section id="launch-code-section" class="hidden">
+  <h2>Launch Code: <span id="launch-code">_ , _ , _ , _</span></h2>
+
+  <div id="code-confirmation" class="hidden">
+    <label for="code-input"><span class="terminal-user">C:\users\director:$</span> Specialist, please confirm code to 'Go for Launch':</label>
+    <input id="code-input" maxlength="4" placeholder="_ _ _ _" autocomplete="off" />
+  </div>
+
+  <div id="code-warning" class="modal hidden">
+    <div class="modal-content">
+      <p>Code Does Not Match! Continue?</p>
+      <div class="warning-options">
+        <div class="option">
+          <button id="retry-code">No</button>
+          <p>Return and re-enter code…</p>
+        </div>
+        <div class="option">
+          <button id="force-launch">Yes</button>
+          <p>WARNING! Possible ABORT!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Info Modals -->
+  <!-- CREW INFO MODAL -->
+  <div id="crew-info" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-info">&times;</button>
+      <p><strong>Crew Info:</strong> Each mission requires specific roles: commander, pilot, engineer, and specialist.</p>
+    </div>
+  </div>
+
+  <!-- DESTINATION INFO MODAL -->
+  <div id="destination-info" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-info">&times;</button>
+      <p><strong>Destination Info:</strong> Destinations vary by distance, duration, and fuel needs. Choose based on mission parameters.</p>
+    </div>
+  </div>
+
+  <!-- WEATHER INFO MODAL -->
+  <div id="weather-info" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-info">&times;</button>
+      <p><strong>Weather Info:</strong> Weather conditions at the launch site impact safety and trajectory. Monitor carefully.</p>
+    </div>
+  </div>
+
+  <!-- ISS INFO MODAL -->
+  <div id="iss-info" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-info">&times;</button>
+      <p><strong>ISS Info:</strong> The ISS's current position helps determine safe timing and orbital paths for launches.</p>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
