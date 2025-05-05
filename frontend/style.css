@@ -34,9 +34,10 @@ button {
   font-size: 1rem;
   margin-bottom: 0.5rem;
   cursor: pointer;
-  background: transparent;
+  background-color: #1b1e24;
   color: #fff;
   border: 2px solid #00bfff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
   border-radius: 6px;
   transition:all 0.2s ease;
 }
@@ -44,6 +45,13 @@ button {
 button:hover {
   background-color: #00bfff;
   color: #000;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .status {
@@ -120,7 +128,7 @@ nav a {
 .info-btn {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: .75rem;
   margin-left: 0.5rem;
   cursor: pointer;
   color: #00bfff;
@@ -140,3 +148,33 @@ nav a {
 .hidden {
   display: none;
 }
+
+/* keep optional Informational Icon on same line as services title */
+.label-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  font-size: 1rem;
+}
+
+/* Landing Page Container */
+.landing-container {
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+/* About Page Container */
+.about-container {
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+

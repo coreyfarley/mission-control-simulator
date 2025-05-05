@@ -18,71 +18,94 @@
 
     <!--CREW-->
     <div class="service">
-        <label for="crew-select">Select Crew:</label>
-        <button class="info-btn" data-target="crew-info">ℹ️</button>
+
+        <div class="label-row">
+          <button class="info-btn" data-target="crew-info">ℹ️</button>
+          <label for="crew-select">Select Crew:</label>
+        </div>
+
         <div id="crew-info" class="info-box hidden">
         Each mission requires specific roles: commander, pilot, engineer, and specialist.
         </div>
+
         <select id="crew-select">
-            <option value="" disabled selected>Select a crew</option>
+            <option value="" disabled selected>click here</option>
             <option value="Artemis II">Artemis II</option>
             <option value="Apollo 11">Apollo 11</option>
             <option value="Expedition 73">Expedition 73</option>
             <option value="Crew 8">Crew 8</option>
          </select>
+
       <button id="crew-btn">Confirm Crew</button>
       <span id="crew-status" class="status">❌</span>
     </div>
 
+
     <!--Destination-->
     <div class="service">
-        <label for="destination-select">Select Destination:</label>
+
+      <div class="label-row">
         <button class="info-btn" data-target="destination-info">ℹ️</button>
-        <div id="destination-info" class="info-box hidden">
-        Destinations vary in distance, travel time, and fuel needs.
-        </div>
-        <select id="destination-select">
-            <option value="" disabled selected>Select a destination</option>
-            <option value="Caloris Basin, Mercury">Caloris Basin, Mercury</option>
-            <option value="Sea of Tranquility, Moon">Sea of Tranquility, Moon</option>
-            <option value="Olympus Mons, Mars">Olympus Mons, Mars</option>
-            <option value="Great Red Spot, Jupiter">Great Red Spot, Jupiter</option>
-        </select>
-        <button id="destination-btn">Confirm Destination</button>
-        <span id="destination-status" class="status">❌</span>
+        <label for="destination-select">Select Destination:</label>
+      </div>
+    
+      <div id="destination-info" class="info-box hidden">
+        Destinations vary by distance, duration, and fuel needs. Choose based on mission parameters.
+      </div>
+    
+      <select id="destination-select">
+        <option value="" disabled selected>click here</option>
+        <option value="Caloris Basin, Mercury">Caloris Basin, Mercury</option>
+        <option value="Sea of Tranquility, Moon">Sea of Tranquility, Moon</option>
+        <option value="Olympus Mons, Mars">Olympus Mons, Mars</option>
+        <option value="Great Red Spot, Jupiter">Great Red Spot, Jupiter</option>
+      </select>
+    
+      <button id="destination-btn">Confirm Destination</button>
+      <span id="destination-status" class="status">❌</span>
     </div>
     
+
+
     <!--Weather-->
     <div class="service">
-        <label for="weather-select">Select Launch Site:</label>
+
+      <div class="label-row">
         <button class="info-btn" data-target="weather-info">ℹ️</button>
-        <div id="weather-info" class="info-box hidden">
-          Launch site weather can influence mission safety. Ensure
-          values are safe before continuing with launch.
-        </div>
-        <select id="weather-select">
-            <option value="" disabled selected>Select a launch site</option>
-            <option value="Cape Canaveral, USA">Cape Canaveral, USA</option>
-            <option value="Vandenberg Space Force Base, USA">Vandenberg Space Force Base, USA</option>
-            <option value="Baikonur Cosmodrome, Russia">Baikonur Cosmodrome, Russia</option>
-            <option value="Tanegashima Space Center, Japan">Tanegashima Space Center, Japan</option>
-        </select>
+        <label for="weather-select">Select Launch Site:</label>
+      </div>
+    
+      <div id="weather-info" class="info-box hidden">
+        Weather conditions at the launch site impact safety and trajectory. Monitor carefully.
+      </div>
+    
+      <select id="weather-select">
+        <option value="" disabled selected>click here</option>
+        <option value="Cape Canaveral, USA">Cape Canaveral, USA</option>
+        <option value="Vandenberg Space Force Base, USA">Vandenberg Space Force Base, USA</option>
+        <option value="Baikonur Cosmodrome, Russia">Baikonur Cosmodrome, Russia</option>
+        <option value="Tanegashima Space Center, Japan">Tanegashima Space Center, Japan</option>
+      </select>
+    
       <button id="weather-btn">Get Weather</button>
       <span id="weather-status" class="status">❌</span>
     </div>
 
+    
+
     <!--International Space Station-->
     <div class="service">
-      <label for="iss-btn">Track ISS:</label>
-      <button class="info-btn" data-target="iss-info">ℹ️</button>
+
+      <div class="label-row">
+        <button class="info-btn" data-target="iss-info">ℹ️</button>
+        <label for="iss-btn">Track ISS:</label>
+      </div>
     
       <div id="iss-info" class="info-box hidden">
-        The ISS location is important for rendezvous missions. Verify current location of ISS will not 
-        interfere with selected launch site.
+        The ISS's current position helps determine safe timing and orbital paths for launches.
       </div>
-
-      <button id="iss-btn">Track ISS</button>
     
+      <button id="iss-btn">Track ISS</button>
       <span id="iss-status" class="status">❌</span>
     </div>
     
