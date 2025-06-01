@@ -21,81 +21,167 @@ function updateChecklist(serviceId) {
 }
 
 // === Crew selection handler ===
-document.getElementById("crew-btn").addEventListener("click", () => {
+document.getElementById("crew-btn").addEventListener("click", async () => {
   const mission = document.getElementById("crew-select").value;
-  const crewOutput = `
-  <div class="output-box">
-  <div class="crew-grid">
-    <div class="role-header">Commander</div>
-    <div class="role-header">Pilot</div>
-    <div class="role-header">Engineer</div>
-    <div class="role-header">Mission Specialist</div>
+  
+  try {
+    const response = await fetch(`http://localhost:3003/crew?mission=${encodeURIComponent(mission.toLowerCase())}`);
     
-    <div>Reid Wiseman</div>
-    <div>Victor Glover</div>
-    <div>Christina Koch</div>
-    <div>Jeremy Hansen</div>
-  </div>
-  </div>
-`;
-  document.getElementById("crew-output").innerHTML = crewOutput;
-  updateChecklist("crew");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    const crewOutput = `
+    <div class="output-box">
+    <div class="crew-grid">
+      <div class="role-header">Commander</div>
+      <div class="role-header">Pilot</div>
+      <div class="role-header">Engineer</div>
+      <div class="role-header">Specialist</div>
+      
+      <div>${data.commander}</div>
+      <div>${data.pilot}</div>
+      <div>${data.engineer}</div>
+      <div>${data.specialist}</div>
+    </div>
+    </div>
+  `;
+    
+    document.getElementById("crew-output").innerHTML = crewOutput;
+    updateChecklist("crew");
+  } catch (error) {
+    console.error("Error fetching crew data:", error);
+    document.getElementById("crew-output").innerHTML = `
+      <div class="output-box error">
+        <p>Error loading crew data. Please try again.</p>
+      </div>
+    `;
+  }
 });
 
 // === Destination selection handler ===
-document.getElementById("destination-btn").addEventListener("click", () => {
+document.getElementById("destination-btn").addEventListener("click", async () => {
   const destination = document.getElementById("destination-select").value;
-  const destOutput = `
-  <div class="output-box">
-  <div class="destination-grid">
-    <div class="dest-header">Distance</div>
-    <div class="dest-header">Estimated Flight Time</div>
-    <div class="dest-header">Fuel Requirement</div>
-
-    <div>500 million km</div>
-    <div>6 months</div>
-    <div>700 tons</div>
-  </div>
-  </div>
-`;
-
-  document.getElementById("destination-output").innerHTML = destOutput;
-  updateChecklist("destination");
-});
-
-// === Weather selection handler ===
-document.getElementById("weather-btn").addEventListener("click", () => {
-  const site = document.getElementById("weather-select").value;
-
-  // Split weather into parts (example values)
-  const temp = "72°F";
-  const skies = "Overcast";
-  const humidity = "62%";
-
-  const weatherOutput = `
-    <div class="output-box">
-      <div class="weather-grid">
-        <div class="weather-header">Temperature</div>
-        <div class="weather-header">Skies</div>
-        <div class="weather-header">Humidity</div>
-
-        <div>${temp}</div>
-        <div>${skies}</div>
-        <div>${humidity}</div>
+  
+  // Check if a destination is selected
+  if (!destination) {
+    document.getElementById("destination-output").innerHTML = `
+      <div class="output-box error">
+        <p>Error loading destination data. Please try again.</p>
       </div>
+    `;
+    return;
+  }
+  
+  // Map the destination to the planet parameter expected by the API
+  const destinationMap = {
+    "Maxwell Montes, Venus": "venus",
+    "Sea of Tranquility, Moon": "moon",
+    "Olympus Mons, Mars": "mars",
+    "Great Red Spot, Jupiter": "jupiter"
+  };
+  
+  const planet = destinationMap[destination] || "moon";
+  
+  try {
+    const response = await fetch(`http://localhost:3000/trip-info?planet=${planet}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    const destOutput = `
+    <div class="output-box">
+    <div class="destination-grid">
+      <div class="dest-header">Distance</div>
+      <div class="dest-header">Flight Time</div>
+      <div class="dest-header">Fuel</div>
+
+      <div>${data.distance.toLocaleString()} km</div>
+      <div>${data.duration}</div>
+      <div>${data.fuel.toLocaleString()} tons</div>
+    </div>
     </div>
   `;
 
-  document.getElementById("weather-output").innerHTML = weatherOutput;
-  updateChecklist("weather");
+    document.getElementById("destination-output").innerHTML = destOutput;
+    updateChecklist("destination");
+  } catch (error) {
+    console.error("Error fetching destination data:", error);
+    document.getElementById("destination-output").innerHTML = `
+      <div class="output-box error">
+        <p>Error loading destination data. Please try again.</p>
+      </div>
+    `;
+  }
+});
+
+// === Weather selection handler ===
+document.getElementById("weather-btn").addEventListener("click", async () => {
+  const site = document.getElementById("weather-select").value;
+  
+  try {
+    const response = await fetch(`http://localhost:3002/weather?site=${encodeURIComponent(site)}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    const weatherOutput = `
+      <div class="output-box">
+        <div class="weather-grid">
+          <div class="weather-header">Temperature</div>
+          <div class="weather-header">Skies</div>
+          <div class="weather-header">Humidity</div>
+
+          <div>${data.temperature}</div>
+          <div>${data.skies}</div>
+          <div>${data.humidity}</div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("weather-output").innerHTML = weatherOutput;
+    updateChecklist("weather");
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    document.getElementById("weather-output").innerHTML = `
+      <div class="output-box error">
+        <p>Error loading weather data. Please try again.</p>
+      </div>
+    `;
+  }
 });
 
 
 // === ISS tracking handler ===
-document.getElementById("iss-btn").addEventListener("click", () => {
-  const iss = "South Pacific Ocean (Lat: -15.6, Lon: -137.8)";
-  document.getElementById("iss-output").innerHTML = `<div class="output-box"><h3>ISS Location</h3><p>${iss}</p></div>`;
-  updateChecklist("iss");
+document.getElementById("iss-btn").addEventListener("click", async () => {
+  try {
+    const response = await fetch('http://localhost:3001/iss-location');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    const iss = `${data.region} (Lat: ${data.latitude}, Lon: ${data.longitude})`;
+    document.getElementById("iss-output").innerHTML = `<div class="output-box"><h3>ISS Location</h3><p>${iss}</p></div>`;
+    updateChecklist("iss");
+  } catch (error) {
+    console.error("Error fetching ISS data:", error);
+    document.getElementById("iss-output").innerHTML = `
+      <div class="output-box error">
+        <p>Error tracking ISS. Please try again.</p>
+      </div>
+    `;
+  }
 });
 
 // === Launch button ===
@@ -268,5 +354,3 @@ document.addEventListener("keydown", (event) => {
     document.getElementById("reset-btn").click();
   }
 });
-
-
