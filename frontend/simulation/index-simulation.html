@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Launch Sequence</title>
+  <link rel="stylesheet" href="styles-simulation.css">
+</head>
+<body>
+  <button id="start-btn" style="display: none;">Start Launch Sequence</button>
+  <button id="restart-btn">Restart Mission</button>
+
+  <div id="launch-sequence" class="hidden">
+    <div class="space" id="space">
+      <div class="stars-container" id="stars-container"></div>
+      <div class="ground" id="ground">
+        <div class="grass"></div>
+        <div class="dirt"></div>
+      </div>
+      <img src="../images/rocket.png" alt="Rocket" class="rocket" id="rocket" />
+      <pre id="telemetry-log" class="telemetry hidden"></pre>
+    </div>
+  </div>
+
+  <div id="solar-view">
+    <button id="return-dashboard-btn" class="control-btn" style="position: absolute; top: 20px; left: 20px; z-index: 2000; font-size: 0.7em; padding: 5px 10px; width: auto;">Return to Dashboard</button>
+    <div id="mission-complete">
+      MISSION COMPLETE<br>
+      The crew has successfully reached <span id="destination-name">Mars</span>!
+      <div style="display: flex; justify-content: center; margin-top: 15px;">
+        <button id="return-home-btn" class="control-btn" style="font-size: 0.9em; padding: 8px 15px; width: auto;">Return to Home</button>
+      </div>
+    </div>
+    <div id="simulation-controls">
+      <button id="pause-btn" class="control-btn">
+        <span class="pause-icon">❚❚</span>
+        <span class="play-icon hidden">▶</span>
+      </button>
+      <button id="fast-forward-btn" class="control-btn">
+        <span class="ff-icon">1x</span>
+      </button>
+    </div>
+    <div id="telemetry-dashboard">
+      <div class="telemetry-title">MISSION TELEMETRY</div>
+      <div class="telemetry-grid">
+        <div class="telemetry-cell">
+          <div class="telemetry-label">MISSION TIME</div>
+          <div class="telemetry-value" id="mission-time">00d 00h 00m</div>
+        </div>
+        <div class="telemetry-cell">
+          <div class="telemetry-label">DISTANCE</div>
+          <div class="telemetry-value" id="distance">0 km</div>
+        </div>
+        <div class="telemetry-cell">
+          <div class="telemetry-label">VELOCITY</div>
+          <div class="telemetry-value" id="velocity">0 km/h</div>
+        </div>
+        <div class="telemetry-cell">
+          <div class="telemetry-label">REMAINING</div>
+          <div class="telemetry-value" id="remaining">0 km</div>
+        </div>
+        <div class="telemetry-cell">
+          <div class="telemetry-label">ETA</div>
+          <div class="telemetry-value" id="eta">00d 00h 00m</div>
+        </div>
+        <div class="telemetry-cell">
+          <div class="telemetry-label">FUEL STATUS</div>
+          <div class="telemetry-value" id="fuel-status">100%</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="fuel-bar" style="width: 100%"></div>
+          </div>
+        </div>
+        <div class="telemetry-status" id="system-status">
+          SYSTEM STATUS: All systems nominal
+        </div>
+      </div>
+    </div>
+    <div id="solar-system">
+      <img src="../images/earth.png" id="earth">
+      <img src="../images/mars.png" id="destination">
+      <svg id="flight-path">
+        <path d="" fill="none" stroke-dasharray="2000" stroke-dashoffset="2000">
+          <animate attributeName="stroke-dashoffset" from="2000" to="0" dur="3s" fill="freeze"/>
+        </path>
+      </svg>
+      <img src="../images/rocket.png" id="rocket-position" style="display: none;">
+      <pre id="solar-telemetry-log" class="telemetry"></pre>
+    </div>
+  </div>
+
+  <script src="simulation.js"></script>
+</body>
+</html>

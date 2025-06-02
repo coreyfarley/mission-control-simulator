@@ -75,13 +75,13 @@ document.getElementById("destination-btn").addEventListener("click", async () =>
     return;
   }
   
-  // Map the destination to the planet parameter expected by the API
-  const destinationMap = {
-    "Maxwell Montes, Venus": "venus",
-    "Sea of Tranquility, Moon": "moon",
-    "Olympus Mons, Mars": "mars",
-    "Great Red Spot, Jupiter": "jupiter"
-  };
+    // Map the destination to the planet parameter expected by the API
+    const destinationMap = {
+      "Maxwell Montes, Venus": "venus",
+      "Sea of Tranquility, Moon": "moon",
+      "Olympus Mons, Mars": "mars",
+      "Great Red Spot, Jupiter": "jupiter" // Maps to jupiter.png
+    };
   
   const planet = destinationMap[destination] || "moon";
   
@@ -188,10 +188,42 @@ document.getElementById("iss-btn").addEventListener("click", async () => {
 document.getElementById("launch-btn").addEventListener("click", () => {
   if (missionAborted) {
     alert("LAUNCH ABORTED. Mission compromised due to code mismatch.");
+    resetMission(); // Only reset if mission is aborted
   } else {
-    alert("Launch Sequence Confirmed. GO FOR LAUNCH!");
+    // Get the selected destination and its data
+    const destination = document.getElementById("destination-select").value;
+    
+    // Map the destination to the planet parameter expected by the API
+    const destinationMap = {
+      "Maxwell Montes, Venus": "venus",
+      "Sea of Tranquility, Moon": "moon",
+      "Olympus Mons, Mars": "mars",
+      "Great Red Spot, Jupiter": "jupiter"
+    };
+    
+    const planet = destinationMap[destination] || "moon";
+    
+    // Get the destination data from the output that was received from the microservice
+    const destinationOutput = document.getElementById("destination-output");
+    
+    // Store mission data in localStorage
+    localStorage.setItem("selectedDestination", destination);
+    localStorage.setItem("selectedPlanet", planet);
+    
+    // If we have destination output data, store it too
+    if (destinationOutput) {
+      const distanceElement = destinationOutput.querySelector(".destination-grid div:nth-child(4)");
+      const durationElement = destinationOutput.querySelector(".destination-grid div:nth-child(5)");
+      const fuelElement = destinationOutput.querySelector(".destination-grid div:nth-child(6)");
+      
+      localStorage.setItem("missionDistance", distanceElement ? distanceElement.textContent : "");
+      localStorage.setItem("missionDuration", durationElement ? durationElement.textContent : "");
+      localStorage.setItem("missionFuel", fuelElement ? fuelElement.textContent : "");
+    }
+    
+    // Navigate to the simulation page
+    window.location.href = "simulation/index-simulation.html";
   }
-  resetMission(); // Automatically reset after launch
 });
 
 // === Reset Confirmation PopUp ===

@@ -1,0 +1,440 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  font-family: sans-serif;
+  background-color: black;
+  color: white;
+}
+
+#restart-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 25px;
+  background: rgba(10, 20, 30, 0.7);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 2000;
+  display: none;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+#restart-btn:hover {
+  background: rgba(30, 40, 50, 0.8);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+#mission-complete {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(10, 20, 30, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 30px 50px;
+  text-align: center;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  z-index: 20;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+#launch-sequence {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1000;
+}
+
+.space {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: background 2s ease;
+  background: linear-gradient(to bottom, #87CEEB, #4682B4);
+}
+
+.space.mid-altitude {
+  background: linear-gradient(to bottom, #4682B4, #2B5F8A);
+  transition: background 2s ease;
+}
+
+.space.in-space {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  transition: background 2s ease;
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15%;
+  z-index: 1;
+  transition: opacity 1s ease;
+  opacity: 1;
+}
+
+.ground.scrolling {
+  animation: groundScroll 3s ease-in forwards;
+}
+
+@keyframes groundScroll {
+  0% { transform: translateY(0); height: 15%; }
+  100% { transform: translateY(100%); height: 0%; }
+}
+
+.dirt {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #4d311d;
+}
+
+.grass {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 10px;
+  background-color: #5a7440;
+  z-index: 2; /* Ensure grass is above dirt */
+}
+
+.ground.hidden {
+  opacity: 0;
+}
+
+.stars-container {
+  position: absolute;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: starDrift 3s linear infinite, twinkle 2s infinite alternate;
+  animation-play-state: paused;
+}
+
+.star.day {
+  animation: starDrift 3s linear infinite, twinkle 2s infinite alternate;
+  animation-play-state: running;
+}
+
+.star.space {
+  animation: starDrift 3s linear infinite, twinkle 2s infinite alternate;
+  animation-play-state: running;
+}
+
+@keyframes starDrift {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(0); }
+  100% { transform: translateY(600px); }
+}
+
+@keyframes twinkle {
+  0%   { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.rocket {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: auto;
+  z-index: 2;
+  animation: none;
+}
+
+@keyframes liftOff {
+  0%   { bottom: 5%; }
+  /* Keep rocket in view while stars are falling */
+  100% { bottom: 80%; }
+}
+
+#start-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 25px;
+  background: rgba(10, 20, 30, 0.7);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 2000;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+#start-btn:hover {
+  background: rgba(30, 40, 50, 0.8);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.telemetry {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45%;
+  max-height: 60%;
+  background: rgba(10, 20, 30, 0.85);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  padding: 15px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  z-index: 3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  line-height: 1.5;
+  text-align: center;
+}
+
+#solar-view {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse at center, #0a1622 0%, #050a14 100%);
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#solar-view::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background-image: 
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 30px 30px, 90px 90px;
+  background-position: 0 0, 15px 15px;
+  animation: starsRotate 300s linear infinite;
+  z-index: -1;
+}
+
+@keyframes starsRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#simulation-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 2000;
+}
+
+.control-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(10, 20, 30, 0.7);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.control-btn:hover {
+  background: rgba(30, 40, 50, 0.8);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+#telemetry-dashboard {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  background: rgba(10, 20, 30, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 10;
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.telemetry-title {
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.telemetry-cell {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.telemetry-cell:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.telemetry-label {
+  font-size: 11px;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.telemetry-value {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.telemetry-status {
+  grid-column: span 3;
+  text-align: center;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 15px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.highlight {
+  animation: highlight 1s ease-out;
+}
+
+@keyframes highlight {
+  0% { color: #4dabf7; }
+  100% { color: #ffffff; }
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4dabf7, #228be6);
+  width: 0%;
+  transition: width 1s ease;
+}
+
+#solar-system {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#solar-telemetry-log {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45%;
+  max-height: 40%;
+  z-index: 10;
+}
+
+#solar-system img {
+  width: 80px;
+  position: absolute;
+}
+
+#earth {
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#destination {
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#flight-path {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  filter: drop-shadow(0 0 5px rgba(77, 171, 247, 0.5));
+}
+
+#flight-path path {
+  stroke: #4dabf7;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#rocket-position {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%) rotate(90deg);
+  z-index: 2;
+  filter: drop-shadow(0 0 8px rgba(77, 171, 247, 0.7));
+  transition: all 0.3s ease;
+}
