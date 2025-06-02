@@ -7,7 +7,8 @@ const microservices = [
   { dir: 'backend/destination-microservice', port: 3000, command: 'npm', args: ['start'] },
   { dir: 'backend/iss-microservice', port: 3001, command: 'npm', args: ['start'] },
   { dir: 'backend/weather-microservice', port: 3002, command: 'npm', args: ['start'] },
-  { dir: 'backend/crew-microservice', port: 3003, command: 'npm', args: ['start'] }
+  { dir: 'backend/crew-microservice', port: 3003, command: 'npm', args: ['start'] },
+  { dir: 'backend/main-server', port: 8080, command: 'npm', args: ['start'] }
 ];
 
 console.log('Starting all microservices...\n');
@@ -17,8 +18,15 @@ const processes = [];
 
 // Function to start a microservice
 function startMicroservice(service) {
-  if (!fs.existsSync(path.join(__dirname, service.dir, 'package.json'))) {
+  // For services using npm start, check for package.json
+  if (service.command === 'npm' && !fs.existsSync(path.join(__dirname, service.dir, 'package.json'))) {
     console.log(`Skipping ${service.dir} - package.json not found`);
+    return;
+  }
+  
+  // For services using node directly, check for the specified JS file
+  if (service.command === 'node' && !fs.existsSync(path.join(__dirname, service.dir, service.args[0]))) {
+    console.log(`Skipping ${service.dir} - ${service.args[0]} not found`);
     return;
   }
 
@@ -52,6 +60,7 @@ function startMicroservice(service) {
 microservices.forEach(startMicroservice);
 
 console.log('\nAll microservices started!');
+console.log('Main application is available at: http://localhost:8080');
 console.log('Press Ctrl+C to stop all services\n');
 
 // Handle script termination

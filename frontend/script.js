@@ -386,3 +386,4 @@ document.addEventListener("keydown", (event) => {
     document.getElementById("reset-btn").click();
   }
 });
+c

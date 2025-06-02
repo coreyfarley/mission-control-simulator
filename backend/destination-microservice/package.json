@@ -1,7 +1,7 @@
 {
-  "name": "main-server",
+  "name": "destination-microservice",
   "version": "1.0.0",
-  "description": "Main server for the mission control application",
+  "description": "Microservice for destination information",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,6 +12,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "cors": "^2.8.5"
   }
 }
