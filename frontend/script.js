@@ -1,3 +1,6 @@
+// Import configuration
+import { CONFIG, getServiceUrl } from './config.js';
+
 // === Track the status of each service selection ===
 const statusFlags = {
   crew: false,
@@ -25,7 +28,8 @@ document.getElementById("crew-btn").addEventListener("click", async () => {
   const mission = document.getElementById("crew-select").value;
   
   try {
-    const response = await fetch(`http://localhost:3003/crew?mission=${encodeURIComponent(mission.toLowerCase())}`);
+    const url = `${getServiceUrl('CREW')}${CONFIG.ENDPOINTS.CREW}?mission=${encodeURIComponent(mission.toLowerCase())}`;
+    const response = await fetch(url);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -86,7 +90,8 @@ document.getElementById("destination-btn").addEventListener("click", async () =>
   const planet = destinationMap[destination] || "moon";
   
   try {
-    const response = await fetch(`http://localhost:3000/trip-info?planet=${planet}`);
+    const url = `${getServiceUrl('DESTINATION')}${CONFIG.ENDPOINTS.DESTINATION}?planet=${planet}`;
+    const response = await fetch(url);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -125,7 +130,8 @@ document.getElementById("weather-btn").addEventListener("click", async () => {
   const site = document.getElementById("weather-select").value;
   
   try {
-    const response = await fetch(`http://localhost:3002/weather?site=${encodeURIComponent(site)}`);
+    const url = `${getServiceUrl('WEATHER')}${CONFIG.ENDPOINTS.WEATHER}?site=${encodeURIComponent(site)}`;
+    const response = await fetch(url);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -163,7 +169,8 @@ document.getElementById("weather-btn").addEventListener("click", async () => {
 // === ISS tracking handler ===
 document.getElementById("iss-btn").addEventListener("click", async () => {
   try {
-    const response = await fetch('http://localhost:3001/iss-location');
+    const url = `${getServiceUrl('ISS')}${CONFIG.ENDPOINTS.ISS}`;
+    const response = await fetch(url);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
