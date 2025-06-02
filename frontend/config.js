@@ -2,7 +2,7 @@
 const CONFIG = {
   // Microservice URLs
   SERVICES: {
-    DESTINATION: "https://mission-control-simulator-destination.onrender.com/",
+    DESTINATION: "https://mission-control-simulator-destination.onrender.com",
     ISS: "https://mission-control-simulator-iss.onrender.com",
     WEATHER: "https://mission-control-simulator-weather.onrender.com",
     CREW: "https://mission-control-simulator-lrmb.onrender.com"
